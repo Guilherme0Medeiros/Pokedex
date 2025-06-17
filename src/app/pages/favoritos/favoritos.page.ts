@@ -27,7 +27,7 @@ export class FavoritosPage implements OnInit {
   async carregarFavoritos() {
     const nomes = this.favoritosService.getFavoritos();
 
-    // busca detalhes do pokemon que foi favoritado
+
     const promessas = nomes.map((nome) =>
       this.pokemonService.getPokemonDetails(nome).toPromise()
     );

@@ -30,4 +30,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- paginacao -->
+  <ion-row class="ion-padding" justify-content-center>
+    <ion-button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">
+      ← Anterior
+    </ion-button>
+    <ion-button (click)="proximaPagina()">
+      Próximo →
+    </ion-button>
+  </ion-row>
 </ion-content>

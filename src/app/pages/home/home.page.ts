@@ -20,13 +20,32 @@ import { RouterModule } from '@angular/router';
 })
 export class HomePage implements OnInit {
   pokemons: any[] = [];
+  paginaAtual: number = 0;
+  limitePorPagina: number = 6;
 
   constructor(private pokeService: PokemonService, private router: Router) {}
 
   ngOnInit() {
-    this.pokeService.getPokemons(50, 0).subscribe((data) => {
+    this.carregarPokemons();
+  }
+
+  carregarPokemons() {
+    const offset = this.paginaAtual * this.limitePorPagina;
+    this.pokeService.getPokemons(this.limitePorPagina, offset).subscribe((data) => {
       this.pokemons = data;
     });
+  }
+
+  proximaPagina() {
+    this.paginaAtual++;
+    this.carregarPokemons();
+  }
+
+  paginaAnterior() {
+    if (this.paginaAtual > 0) {
+      this.paginaAtual--;
+      this.carregarPokemons();
+    }
   }
 
   openDetails(name: string) {
