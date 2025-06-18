@@ -12,15 +12,14 @@
           [name]="isFavorito() ? 'heart' : 'heart-outline'"
           color="danger"
           slot="icon-only"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="!isLoading; else loading" fullscreen scroll-y="true">
-  <ion-card>
+  <ion-card style="background: #1e1e1e; color: white;">
     <img
       [src]="pokemon.sprites.front_default"
       [alt]="pokemon.name"
@@ -34,23 +33,50 @@
       "
     />
     <ion-card-header>
-      <ion-card-title>Informações</ion-card-title>
+      <ion-card-title
+        style="font-size: 1.5rem; font-weight: bold; text-align: center; color: white;"
+      >
+        Informações
+      </ion-card-title>
     </ion-card-header>
-    <ion-list>
-      <ion-item><strong>Nº Pokédex: </strong> {{ pokemon.id }} </ion-item>
-      <ion-item><strong>Altura:</strong> {{ pokemon.height }}</ion-item>
-      <ion-item><strong>Peso:</strong> {{ pokemon.weight }}</ion-item>
-      <ion-item><strong>Tipo(s):</strong> {{ types }}</ion-item>
-      <ion-item><strong>Habilidades:</strong> {{ abilities }}</ion-item>
-      <ion-item>
-        <strong>Status:</strong>
-        <ul>
+
+    <ion-card-content
+      style="
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: white;
+      "
+    >
+      <div style="margin-bottom: 8px;">
+        <strong style="display: inline-block; width: 130px; color: white;">Nº Pokédex:</strong>
+        <span style="color: lightgray;">{{ pokemon.id }}</span>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <strong style="display: inline-block; width: 130px; color: white;">Altura:</strong>
+        <span style="color: lightgray;">{{ pokemon.height }}</span>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <strong style="display: inline-block; width: 130px; color: white;">Peso:</strong>
+        <span style="color: lightgray;">{{ pokemon.weight }}</span>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <strong style="display: inline-block; width: 130px; color: white;">Tipo(s):</strong>
+        <span style="color: lightgray;">{{ types }}</span>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <strong style="display: inline-block; width: 130px; color: white;">Habilidades:</strong>
+        <span style="color: lightgray;">{{ abilities }}</span>
+      </div>
+      <div style="margin-top: 16px;">
+        <strong style="color: white;">Status:</strong>
+        <ul style="margin-top: 4px; padding-left: 20px; color: lightgray;">
           <li *ngFor="let stat of pokemon.stats">
-            {{ stat.stat.name }}: {{ stat.base_stat }}
+            {{ stat.stat.name | titlecase }}: {{ stat.base_stat }}
           </li>
         </ul>
-      </ion-item>
-    </ion-list>
+      </div>
+    </ion-card-content>
   </ion-card>
 </ion-content>
 
