@@ -1,20 +1,46 @@
 <ion-header>
   <ion-toolbar style="--background: black;">
     <ion-title>Favoritos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/" color="medium">
+        <ion-label style="color: white;">Inicio</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen scroll-y="true">
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let pokemon of favoritos">
-        <ion-card (click)="openDetails(pokemon.name)">
-          <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
-          <ion-card-header>
-            <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
-          </ion-card-header>
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="3" *ngFor="let pokemon of favoritos">
+        <ion-card>
+          <ion-button
+            fill="clear"
+            color="danger"
+            size="small"
+            (click)="removerFavorito(pokemon.name)"
+            style="position: absolute; top: 5px; right: 5px; z-index: 10;"
+          >
+            ✕
+          </ion-button>
+          <div (click)="openDetails(pokemon.name)" style="cursor: pointer;">
+            <img
+              [src]="pokemon.sprites.front_default"
+              [alt]="pokemon.name"
+              style="width: 100%; object-fit: contain; aspect-ratio: 1;"
+            />
+            <ion-card-header>
+              <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+            </ion-card-header>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-card *ngIf="favoritos.length === 0" class="ion-text-center">
+    <ion-card-header>
+      <ion-card-title>Nenhum Pokémon favoritado ainda.</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 </ion-content>

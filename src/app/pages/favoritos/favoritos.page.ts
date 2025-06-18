@@ -27,12 +27,16 @@ export class FavoritosPage implements OnInit {
   async carregarFavoritos() {
     const nomes = this.favoritosService.getFavoritos();
 
-
     const promessas = nomes.map((nome) =>
       this.pokemonService.getPokemonDetails(nome).toPromise()
     );
 
     this.favoritos = await Promise.all(promessas);
+  }
+
+  removerFavorito(nome: string) {
+    this.favoritosService.toggleFavorito(nome); // alterna a marcação
+    this.favoritos = this.favoritos.filter(p => p.name !== nome); // remove da exibição
   }
 
   openDetails(nome: string) {

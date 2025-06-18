@@ -17,12 +17,44 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen scroll-y="true">
+  <ion-item>
+    <ion-input
+      placeholder="Buscar Pokémon..."
+      [(ngModel)]="busca"
+      (ionInput)="filtrarPokemons()"
+    ></ion-input>
+  </ion-item>
+
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let pokemon of pokemons">
-        <ion-card (click)="openDetails(pokemon.name)">
-          <img [src]="pokemon.image" [alt]="pokemon.name" />
+      <ion-col
+        size="12"
+        size-sm="6"
+        size-md="4"
+        size-lg="3"
+        *ngFor="let pokemon of pokemons"
+      >
+        <ion-card 
+          style="position: relative; transition: transform 0.2s ease; cursor: pointer"
+          onmousedown="this.style.transform='scale(0.97)'"
+          onmouseup="this.style.transform='scale(1)'"
+          onmouseleave="this.style.transform='scale(1)'"
+        >
+          <ion-icon
+            name="heart"
+            [color]="isFavorito(pokemon.name) ? 'danger' : 'medium'"
+            style="position: absolute; top: 8px; right: 8px; z-index: 10; font-size: 24px;"
+            (click)="toggleFavorito(pokemon.name); $event.stopPropagation()"
+          ></ion-icon>
+
+          <img
+            [src]="pokemon.image"
+            [alt]="pokemon.name"
+            style="width: 100%; object-fit: contain; aspect-ratio: 1"
+            (click)="openDetails(pokemon.name)"
+          />
+
           <ion-card-header>
             <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
           </ion-card-header>
@@ -31,13 +63,26 @@
     </ion-row>
   </ion-grid>
 
-  <!-- paginacao -->
-  <ion-row class="ion-padding" justify-content-center>
-    <ion-button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">
+  <ion-row class="ion-padding justify-content-center" style="gap: 8px; flex-wrap: wrap;">
+    <ion-button fill="outline" (click)="irParaPagina(0)" [disabled]="paginaAtual === 0">
+      Primeira
+    </ion-button>
+
+    <ion-button fill="outline" (click)="paginaAnterior()" [disabled]="paginaAtual === 0">
       ← Anterior
     </ion-button>
-    <ion-button (click)="proximaPagina()">
-      Próximo →
+
+    <ng-container *ngFor="let pagina of paginasVisiveis">
+      <ion-button
+        fill="solid"
+        [color]="pagina === paginaAtual ? 'primary' : 'medium'"
+        (click)="irParaPagina(pagina)">
+        {{ pagina + 1 }}
+      </ion-button>
+    </ng-container>
+
+    <ion-button fill="outline" (click)="proximaPagina()" [disabled]="paginaAtual >= maxPaginas">
+      Próxima →
     </ion-button>
   </ion-row>
 </ion-content>

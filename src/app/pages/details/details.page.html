@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar style="--background: black;">
+  <ion-toolbar style="--background: black">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -11,16 +11,28 @@
         <ion-icon
           [name]="isFavorito() ? 'heart' : 'heart-outline'"
           color="danger"
-          slot="icon-only">
+          slot="icon-only"
+        >
         </ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!isLoading; else loading">
+<ion-content *ngIf="!isLoading; else loading" fullscreen scroll-y="true">
   <ion-card>
-    <img [src]="pokemon.sprites.front_default" [alt]="pokemon.name" />
+    <img
+      [src]="pokemon.sprites.front_default"
+      [alt]="pokemon.name"
+      style="
+        width: 100%;
+        max-width: 300px;
+        margin: auto;
+        display: block;
+        object-fit: contain;
+        aspect-ratio: 1;
+      "
+    />
     <ion-card-header>
       <ion-card-title>Informações</ion-card-title>
     </ion-card-header>
@@ -41,7 +53,6 @@
     </ion-list>
   </ion-card>
 </ion-content>
-
 
 <ng-template #loading>
   <ion-spinner></ion-spinner>
