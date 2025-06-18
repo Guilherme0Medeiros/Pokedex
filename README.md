@@ -62,3 +62,10 @@ ionic serve
 ng test
 
 ```
+## Imagens
+<p align="center">
+<img src="https://github.com/user-attachments/assets/4a4e3a50-cbcb-432e-ba53-d1a421f0cd67" height="350" />
+<img src="https://github.com/user-attachments/assets/f490866c-69d9-4f42-ab9c-5c5d8d876bfb" height="350" />
+<img src="https://github.com/user-attachments/assets/fd268ad8-f844-4ec9-afa6-9306dd01697c" height="350" />  
+<img src="https://github.com/user-attachments/assets/7f68f45e-3ab0-4976-adfe-b50db9d262ba" height="350" />
+</p>
